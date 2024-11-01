@@ -22,7 +22,7 @@ nnoremap <M-Up> ddkkp
 nnoremap <M-Down> ddp 
 
 "Java
-autocmd FileType java iabbrev <buffer> boiler public class x<esc>o{<CR>public static void main(String[] args)<esc>o{<tab><CR><esc>o}<esc>o}<esc>kkkkkk<esc>wwi<BS>
+autocmd FileType java iabbrev <buffer> boiler public class x<esc>o{<CR>public static void main(String[] args)<esc>o{<tab><CR><esc>o}<esc>o}<esc>kkkkkk<esc>wwx<BS>a
 autocmd FileType java iabbrev <buffer> SYSO System.out.println ();
 
 "Status line
