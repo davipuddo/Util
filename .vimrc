@@ -25,6 +25,9 @@ nnoremap <M-Down> ddp
 autocmd FileType java iabbrev <buffer> boiler public class x<esc>o{<CR>public static void main(String[] args)<esc>o{<tab><CR><esc>o}<esc>o}<esc>kkkkkk<esc>wwx<BS>a
 autocmd FileType java iabbrev <buffer> SYSO System.out.println ();
 
+"C
+autocmd FileType c iabbrev <buffer> MAINC #include<esc>ddpi<BS><esc>wwa <stdio.h><esc>pwwa <stdlib.h><esc>pwwa <stdbool.h><esc>pwwa <string.h><esc>pwwa <math.h><esc>pwwa <limits.h><esc>pwwa <time.h><esc>o<CR>int main(void)<esc>o{<esc>oreturn(0);<esc>o}<esc>k
+
 "Status line
 set laststatus=2
 set statusline=\ %f\ -\ %y\ %m
