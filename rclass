@@ -1,0 +1,25 @@
+#!/bin/bash
+
+readDelete()
+{
+	read x
+	if [ $x == "y" ]; then
+		rm *.class
+		echo "The files were deleted."
+	elif [ $x == "n" ]; then
+		echo "Aborting script."
+	else
+		readDelete
+	fi
+}
+
+f=(*.class)
+
+if [ -f "${f[0]}" ]; then
+	echo "Delete:"
+	ls *.class
+	echo "[y/n]"
+	readDelete
+else 
+	echo "ERROR: No file '.class' was found!"
+fi
