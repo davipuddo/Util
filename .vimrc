@@ -32,6 +32,10 @@ autocmd FileType java iabbrev <buffer> SYSO System.out.println ();<esc>F(a
 
 "C
 autocmd FileType c iabbrev <buffer> MAINC #include<esc>ddpi<BS><esc>wwa <stdio.h><esc>pwwa <stdlib.h><esc>pwwa <stdbool.h><esc>pwwa <string.h><esc>pwwa <math.h><esc>pwwa <limits.h><esc>pwwa <time.h><esc>o<CR>int main(void)<esc>o{<esc>oreturn(0);<esc>o}<esc>k
+autocmd FileType c iabbrev <buffer> println printf("\n");<esc>F\i
+
+"CSS
+autocmd FileType css iabbrev <buffer> IMP !important
 
 "Status line
 set laststatus=2
