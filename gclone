@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Variables
+acc=$1
+repo=$2
+def="davipuddo"
+
+# Check parameters
+if [ $# == 0 ]; then
+	echo "ERROR: No repository name was given!"
+	echo "To clone a repository first give the owner's name, then give the repository name."
+
+elif [ $# -gt 2 ]; then
+	echo "ERROR: Too many parameters were given!"
+
+else
+	line=""
+	if [ $# == 1 ]; then 	# If only one parameter is given use the default username
+		repo=$acc
+		line="https://github.com/"$def"/"$repo".git"
+	else
+		line="https://github.com/"$acc"/"$repo".git"
+	fi
+	git clone $line			# Clone repository
+fi
