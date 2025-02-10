@@ -2,6 +2,10 @@
 
 readDelete()
 {
+	echo "Delete:"
+	ls *.class
+	echo "[y/n]"
+
 	read x
 	if [ $x == "y" ]; then
 		rm *.class
@@ -9,6 +13,8 @@ readDelete()
 	elif [ $x == "n" ]; then
 		echo "Aborting script."
 	else
+		echo "ERROR: Invalid input!"
+		echo ""
 		readDelete
 	fi
 }
@@ -16,9 +22,6 @@ readDelete()
 f=(*.class)
 
 if [ -f "${f[0]}" ]; then
-	echo "Delete:"
-	ls *.class
-	echo "[y/n]"
 	readDelete
 else 
 	echo "ERROR: No file '.class' was found!"
