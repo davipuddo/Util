@@ -1,0 +1,2 @@
+#!/bin/bash
+gnome-terminal -- sh -c "bash -c \"$1; exec bash\""
