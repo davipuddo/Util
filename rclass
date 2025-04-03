@@ -4,11 +4,13 @@ readDelete()
 {
 	echo "Delete:"
 	ls *.class
+	ls ./*/*.class
 	echo "[y/n]"
 
 	read x
 	if [ $x == "y" ]; then
 		rm *.class
+		rm ./*/*.class
 		echo "The files were deleted."
 	elif [ $x == "n" ]; then
 		echo "Aborting script."
