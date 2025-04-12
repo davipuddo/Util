@@ -29,7 +29,7 @@ readDelete()
 if [ $# != 1 ]; then # Check parameters
 
 	echo "ERROR: Invalid parameters!"
-	echo "Use: rext extension"
+	echo "Use: rext [extension]"
 
 else
 
