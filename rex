@@ -4,6 +4,9 @@ ext=$1
 cur=false # current directory
 sub=false # directories 1 level below
 
+f=(*.${ext}) 		# Look for files in current dir
+df=(./*/*.${ext})	#     ==         in subdirectories
+
 readDelete()
 {
 	printf "\nDo you want to delete the given files?\n[Y\N]\n"
@@ -12,7 +15,7 @@ readDelete()
 
 	if [ $x == "Y" ] || [ $x == "y" ]; then # Delete files
 		rm *.${ext}
-		rm ./*/*.${ext}
+		recurse
 		echo "The files were deleted."
 
 	elif [ $x == "n" ] || [ $x == "N" ] ; then # Abort
@@ -26,6 +29,13 @@ readDelete()
 	fi
 }
 
+recurse()
+{
+	if [ -f "${df[0]}" ]; then
+		echo "sim"	
+	fi
+}
+
 if [ $# != 1 ]; then # Check parameters
 
 	echo "ERROR: Invalid parameters!"
@@ -33,18 +43,15 @@ if [ $# != 1 ]; then # Check parameters
 
 else
 
-	f=(*.${ext}) 		# Look for files in current dir
-	df=(./*/*.${ext})	#     ==         in subdirectories
+	ls -R *.{$ext}
 
 	if [ -f "${f[0]}" ]; then # current
 		printf "current: "
-		ls *.${ext}
 		cur=true
 	fi
 
-	if [ -f "${df[0]}" ]; then # sub
-		printf "sub: "
-		ls ./*/*.${ext}
+	if [ -f "${df[0]}" ]; then # current
+		printf "current: "
 		sub=true
 	fi
 
