@@ -15,7 +15,7 @@ readDelete()
 
 	if [ $x == "Y" ] || [ $x == "y" ]; then # Delete files
 		rm *.${ext}
-		recurse
+		recurseDelete
 		echo "The files were deleted."
 
 	elif [ $x == "n" ] || [ $x == "N" ] ; then # Abort
@@ -29,11 +29,29 @@ readDelete()
 	fi
 }
 
-recurse()
+recurseFind()
 {
 	if [ -f "${df[0]}" ]; then
-		echo "sim"	
-	fi
+		
+		echo "Sub: "
+		for i in */*.$ext;
+		do
+			eza "$i";
+		done
+		echo ""
+		sub=true
+	fi 
+}
+
+recurseDelete()
+{
+	if [ -f "${df[0]}" ]; then
+		
+		for i in */*.$ext;
+		do
+			rm "$i";
+		done
+	fi 
 }
 
 if [ $# != 1 ]; then # Check parameters
@@ -43,17 +61,14 @@ if [ $# != 1 ]; then # Check parameters
 
 else
 
-	ls -R *.{$ext}
-
 	if [ -f "${f[0]}" ]; then # current
-		printf "current: "
+		echo "Current: "
+		eza *.$ext
+		echo ""
 		cur=true
 	fi
 
-	if [ -f "${df[0]}" ]; then # current
-		printf "current: "
-		sub=true
-	fi
+	recurseFind
 
 	if [ "$cur" = true ] || [ "$sub" = true ]; then
 		readDelete
