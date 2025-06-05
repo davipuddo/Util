@@ -23,7 +23,11 @@ else
 	elif [ $# == 2 ]; then
 		line="$line$acc/$repo.git"
 	else
-		line="$line$acc/$repo.git $path"
+		if [ "$acc" == "-d" ]; then
+			line="$line$def/$repo.git $path"
+		else
+			line="$line$acc/$repo.git $path"
+		fi
 	fi
 	
 	git clone $line			# Clone repository
