@@ -1,8 +1,15 @@
 #!/bin/bash
 
-if [ $# == 1 ]; then
-	python3 -m http.server $1 --directory .
-elif [ $# == 0 ]; then
-	python3 -m http.server 5522 --directory .
+if [ $1 ]; then
+	
+	if [ $1 -lt 1000 ]; then
+		echo "Invalid port!"
+	else
+		python3 -m http.server $1 --directory .
+	fi
+
+else
+	echo "No port was given, defaulting to 5555"
+	python3 -m http.server 5555 --directory .
 fi
 		
