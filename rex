@@ -24,7 +24,7 @@ if [ ! $EXT ]; then
 	echo "ERROR: Invalid parameters!"	
 else
 
-	MATCHES=$(find . -type f | grep -w ".\.$EXT")
+	MATCHES=$(find . -type f | grep -w ".*\.$EXT")
 
 	if [ "$MATCHES" == "" ]; then
 		echo "No matches were found!"
