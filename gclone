@@ -1,34 +1,90 @@
 #!/bin/bash
 
 # Variables
-acc=$1
-repo=$2
-path=$3
+N=$#
 def="davipuddo"
+clone_path=0
+link="https://github.com/"
 
 # Check parameters
 
-if [ $# == 0 ]; then
-	echo "ERROR: No repository name was given!"
-	echo "To clone a repository first give the owner's name, then give the repository name."
+clone()
+{
+	if [ $clone_path != 0 ]; then
+		git clone "$link$acc/$repo.git" $clone_path
+	else
+		git clone "$link$acc/$repo.git"
+	fi
+}
 
-elif [ $# -gt 3 ]; then
-	echo "ERROR: Too many parameters were given!"
+help()
+{
+	printf "
+Options:\n
+- gclone [repository]
+- gclone [repository_owner] [repository]
+- gclone [-p] [repository] [path]
+- gclone [-p] [repository_owner] [repository] [path]
+- gclone [-m] [repository1] ... [repositoryN]
+"
+}
+
+if [ $N == 0 ]; then
+	echo "ERROR: No repository name was given!"
+	help
+
+elif [ $N == 1 ]; then
+
+	if [ $1 == "-h" ] || [ $1 == "--help" ]; then
+		help
+	else
+		acc=$def
+		repo=$1
+		clone
+	fi
+
+elif [ $N == 2 ]; then
+	acc=$1
+	repo=$2
+	clone
+
+elif [ $N == 3 ]; then
+
+	if [ "$1" == "-p" ]; then
+		acc=$def
+		repo=$2
+		clone_path=$3
+		clone
+	elif [ "$1" == "-m" ]; then
+		acc=$def
+		shift 1
+		for var in "$@"
+		do
+			repo=$var
+			clone
+		done
+	fi
+
+elif [ $N -gt 3 ]; then
+
+	if [ "$1" == "-p" ]; then
+		acc=$2
+		repo=$3
+		clone_path=$4
+		clone
+
+	elif [ "$1" == "-m" ]; then
+		acc=$def
+		shift 1
+		for var in "$@"
+		do
+			repo=$var
+			clone
+		done
+	else
+		echo "ERROR: Too many parameters were given!"
+	fi
 
 else
-	line="https://github.com/"
-	if [ $# == 1 ]; then 	# If only one parameter is given use the default username
-		repo=$acc
-		line="$line$def/$repo.git"
-	elif [ $# == 2 ]; then
-		line="$line$acc/$repo.git"
-	else
-		if [ "$acc" == "-d" ]; then
-			line="$line$def/$repo.git $path"
-		else
-			line="$line$acc/$repo.git $path"
-		fi
-	fi
-	
-	git clone $line			# Clone repository
+	echo "ERROR: Too many parameters were given!"
 fi
